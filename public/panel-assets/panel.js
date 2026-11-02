@@ -21,11 +21,38 @@ function logout(){token='';sessionStorage.removeItem('tk');go('/admin/login')}
 const PG=document.body.dataset.page,ID=document.body.dataset.id,go=u=>location.href=u;
 function render(){
   document.body.classList.toggle('guest',!token);
-  if(!token){$('#main').innerHTML=`<div class="card login"><div class="loginMark">A</div><p class="eyebrow">AL ASRA ADMIN</p><h1>Welcome back</h1><p class="loginSub">Sign in to manage your store.</p><label>Email address</label><input id="em" type="email" autocomplete="username" placeholder="admin@example.com"><label>Password</label><input id="pw" type="password" autocomplete="current-password" placeholder="Enter your password"><p><button class="loginSubmit" id="go" style="width:100%">Sign in to dashboard</button></p></div>`;
-    $('#go').onclick=()=>run(async()=>{const j=await api('/auth/login','POST',{email:$('#em').value,password:$('#pw').value});
-      if(!['admin','staff'].includes(j.data.user.role))throw new Error('This account is not admin/staff');
-      token=j.data.token;sessionStorage.setItem('tk',token);go('/admin/dashboard')});
-    $('#pw').onkeydown=e=>e.key==='Enter'&&$('#go').click();return}
+  if(!token){
+    $('#main').innerHTML=`<section class="simpleLogin" aria-labelledby="admin-login-title">
+      <header class="simpleLoginBrand"><span class="simpleLoginMark">A</span><span><b>AL ASRA</b><small>ADMIN PANEL</small></span></header>
+      <div class="simpleLoginIntro"><p class="simpleEyebrow">ADMINISTRATOR ACCESS</p><h1 id="admin-login-title">Welcome back</h1><p>Sign in to manage your store.</p></div>
+      <form id="adminLoginForm" autocomplete="on" novalidate>
+        <label for="em">Email address</label>
+        <input id="em" name="email" type="email" inputmode="email" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="admin@alasra.com" required>
+        <div class="simplePasswordLabel"><label for="pw">Password</label><span>Forgot password?</span></div>
+        <div class="simplePasswordWrap"><input id="pw" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required><button class="simplePasswordToggle" id="togglePassword" type="button" aria-label="Show password">Show</button></div>
+        <button class="simpleLoginSubmit" id="go" type="submit">Sign in <span aria-hidden="true">→</span></button>
+      </form>
+      <p id="loginError" class="loginError" role="alert" aria-live="polite"></p>
+      <footer class="simpleLoginFoot">Al Asra · Store administration</footer>
+    </section>`;
+    const form=$('#adminLoginForm'),email=$('#em'),password=$('#pw'),submit=$('#go'),error=$('#loginError'),toggle=$('#togglePassword');
+    toggle.addEventListener('click',()=>{const show=password.type==='password';password.type=show?'text':'password';toggle.textContent=show?'Hide':'Show';toggle.setAttribute('aria-label',show?'Hide password':'Show password');password.focus()});
+    // Keep the fields directly interactive and submit their actual current values.
+    [email,password].forEach(input=>input.addEventListener('input',()=>{error.textContent=''}));
+    form.addEventListener('submit',e=>{e.preventDefault();run(async()=>{
+      const credentials={email:email.value.trim(),password:password.value};
+      if(!credentials.email||!credentials.password){error.textContent='Enter both your email address and password.';return}
+      submit.disabled=true;submit.textContent='Signing in…';error.textContent='';
+      try{
+        const j=await api('/auth/login','POST',credentials);
+        if(!j.data?.user||!j.data?.token)throw new Error('Login response was incomplete.');
+        if(!['admin','staff'].includes(j.data.user.role))throw new Error('This account is not admin/staff.');
+        token=j.data.token;sessionStorage.setItem('tk',token);go('/admin/dashboard');
+      }catch(err){error.textContent=err.message;throw err}
+      finally{submit.disabled=false;submit.innerHTML='Sign in <span aria-hidden="true">→</span>'}
+    })});
+    return;
+  }
   const isId=ID&&ID!=='new';
   const pages={dashboard:dash,orders:()=>isId?orderDetail(ID):orders(),products:()=>ID?productForm(isId?ID:undefined):products(),categories,coupons,banners,faqs,reviews,customers,staff,settings,audit};
   pages[PG]();
