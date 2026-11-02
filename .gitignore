@@ -1,0 +1,15 @@
+/vendor
+/node_modules
+/.env
+/.phpunit.cache
+/storage/*.key
+/storage/logs/*.log
+/public/storage
+/bootstrap/cache/*.php
+
+# Nested frontend dependencies and generated static builds
+**/node_modules/
+**/.next/
+**/out/
+/public/_next/
+/public/storefront-pages/

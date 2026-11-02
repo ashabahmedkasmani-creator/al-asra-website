@@ -1,0 +1,10 @@
+@extends('storefront.layout')
+@section('title','Shop | Al-Asra Store')
+@section('content')<section class="sec"><div class="center"><span class="kick">Explore the collection</span><h1>Shop all products</h1><p>Discover useful products, everyday essentials and carefully selected finds.</p></div><form method="get" class="shop-filter"><input name="q" value="{{ request('q') }}" placeholder="Search products"><select name="category"><option value="">All categories</option>@foreach($categories as $c)<option value="{{ $c->slug }}" @selected(request('category')===$c->slug)>{{ $c->name }}</option>@endforeach</select><button class="btn">Search</button></form><div class="pgrid">@forelse($products as $p)
+@php
+$im = $p->images->first()?->url ?? (['portable-juice-blender'=>'/images/products/portable-blender.png','ice-cream-tumbler-with-straw'=>'/images/products/ice-cream-tumbler.png','electric-milk-frother'=>'/images/products/milk-frother.png'][$p->slug] ?? '/logo.png');
+$cartItem = ['id' => $p->id, 'name' => $p->name, 'price' => (float) $p->effective_price, 'image' => $im];
+@endphp
+<article class="pcard"><a class="pic" href="/product/{{ $p->slug }}"><img src="{{ $im }}" alt="{{ $p->name }}"></a><small>{{ $p->category?->name }}</small><h3><a href="/product/{{ $p->slug }}">{{ $p->name }}</a></h3><div class="prow"><b>PKR {{ number_format((float)$p->effective_price) }}</b><button class="addbag" onclick='AlAsraCart.add(@json($cartItem))'>Add</button></div></article>
+@empty<div class="empty">No products found. Please check back soon.</div>@endforelse</div><div class="pagination">{{ $products->links() }}</div></section>@endsection
+@push('head')<style>.shop-filter{display:flex;gap:12px;max-width:700px;margin:0 auto 35px}.shop-filter input,.shop-filter select{border:1px solid #e5ddd6;border-radius:30px;padding:12px 16px;min-width:0;flex:1}.shop-filter .btn{margin:0;border-radius:30px}.pagination{margin-top:30px}.pagination nav{display:flex;justify-content:center;gap:8px}.pagination a,.pagination span{padding:8px 12px;background:#f7f4f0;border-radius:8px}@media(max-width:560px){.shop-filter{flex-wrap:wrap}}</style>@endpush
