@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('panel-assets/admin-ui.css') }}?v=20261102-login-ui">
+    <link rel="stylesheet" href="{{ asset('panel-assets/admin-ui.css') }}?v=20261103-dashboard-restore">
 </head>
 <body data-page="{{ $page }}" data-id="{{ $id ?? '' }}">
     @php
@@ -73,6 +73,6 @@
     </div>
 
     <div id="msg" class="toast" role="status" aria-live="polite"></div>
-    <script src="{{ asset('panel-assets/panel.js') }}?v=20261102-login-ui" defer></script>
+    <script src="{{ asset('panel-assets/panel.js') }}?v=20261103-dashboard-restore" defer></script>
 </body>
 </html>

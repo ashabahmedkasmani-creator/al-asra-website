@@ -29,32 +29,6 @@ html[data-theme=dark],body[data-theme=dark]{--bg:#111113;--panel:#18181b;--text:
   .contentArea>.hero h1{font-size:24px}
 }
 
-/* Login form: keep all controls above decorative layers and fully editable. */
-.guest #main{position:relative;z-index:1;pointer-events:auto}
-.guest #main .login{position:relative;z-index:2;pointer-events:auto;overflow:visible;width:min(100%,420px)}
-.guest #main .login form,.guest #main .login label,.guest #main .login input,.guest #main .login button{position:relative;z-index:3;pointer-events:auto}
-.guest #main .login input{display:block;width:100%;min-height:48px;margin:7px 0 16px;padding:12px 14px;background:#fff;color:#171719;border:1px solid #d9d9df;border-radius:10px;font:inherit;opacity:1;touch-action: manipulation;user-select:text;-webkit-user-select:text}
-.guest #main .login input:focus{outline:2px solid var(--orange);outline-offset:1px;border-color:var(--orange)}
-.guest #main .loginSubmit{width:100%;min-height:46px;justify-content:center}
-.guest #main .loginSubmit:disabled{opacity:.65;cursor:wait}
-.loginError{min-height:18px;margin:8px 0 0;color:#b3261e;font-size:12px}
-
-
-/* Human-friendly Al Asra admin sign-in */
-.guest .contentArea{padding:34px!important;background:radial-gradient(ellipse at 18% 12%,#fbe9e2 0,transparent 36%),linear-gradient(135deg,#faf8f6,#f4f1ef);}
-.guest .contentArea>.hero{display:none!important}
-.guest #main{min-height:calc(100vh - 68px);display:grid;place-items:center;}
-.loginFrame{width:min(100%,960px);min-height:570px;display:grid;grid-template-columns: .94fr 1.06fr;background:#fff;border:1px solid #eee5e1;border-radius:24px;overflow:hidden;box-shadow:0 28px 80px #35101418;}
-.loginStory{position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:38px 38px 30px;color:#fff;background:radial-gradient(circle at 85% 15%,#74313a 0,transparent 32%),linear-gradient(145deg,#4a151b,#270c10 78%);overflow:hidden;}
-.loginStory:after{content:"A";position:absolute;right:-30px;bottom:-145px;font-size:440px;line-height:1;font-weight:900;color:#ffffff08;pointer-events:none;}
-.loginBrand,.loginMobileBrand{display:flex;align-items:center;gap:12px;position:relative;z-index:1;}
-.loginBrandMark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:#f15a24;color:white;font-size:24px;font-weight:900;box-shadow:0 8px 20px #f15a2433;}
-.loginBrand b{display:block;letter-spacing:.13em;font-size:14px;}.loginBrand small{display:block;font-size:9px;letter-spacing:.16em;opacity:.6;margin-top:4px;}
-.loginStoryCopy{position:relative;z-index:1;max-width:360px;margin:45px 0;}.storyKicker,.loginWelcome{font-size:10px;letter-spacing:.18em;font-weight:800;color:#f15a24;}.loginStoryCopy h2{font-size:36px;line-height:1.15;letter-spacing:-.045em;margin:18px 0 14px;}.loginStoryCopy p{font-size:14px;line-height:1.8;color:#ffffffb8;max-width:330px;}
-.loginStoryFoot{position:relative;z-index:1;font-size:11px;color:#ffffffa8;display:flex;align-items:center;gap:9px;}.storyDot{width:7px;height:7px;border-radius:50%;background:#72d49a;box-shadow:0 0 0 4px #72d49a22;}.storyDivider{opacity:.4;}
-.loginPanel{padding:68px 64px;align-self:center;}.loginMobileBrand{display:none;margin-bottom:38px;color:#351014;}.loginPanel h1{font-size:29px;letter-spacing:-.045em;margin:12px 0 9px;color:#21191a;}.loginSub{font-size:13px;color:#81777a;margin:0 0 34px;}.loginPanel form label{display:block;font-size:12px;font-weight:700;color:#44393a;margin:0 0 8px;}.loginPanel input{display:block;width:100%;height:50px;padding:0 15px;border:1px solid #e6deda;border-radius:11px;background:#fff;color:#21191a;font:inherit;font-size:13px;outline:none;box-shadow:0 2px 5px #35101405;transition:border-color .18s,box-shadow .18s;position:relative;z-index:1;pointer-events:auto;user-select:text;-webkit-user-select:text;}.loginPanel input:focus{border-color:#f15a24;box-shadow:0 0 0 4px #f15a2418;}.loginPanel input::placeholder{color:#b2a9a8;}.loginPanel form>input{margin-bottom:22px;}.passwordLabel{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}.passwordLabel label{margin:0!important;}.passwordLabel span{font-size:10px;color:#a49a99;}.passwordWrap{position:relative;}.passwordWrap input{padding-right:66px;}.passwordToggle{position:absolute;right:8px;top:7px;z-index:4;height:36px;padding:0 10px!important;border:0!important;background:transparent!important;color:#8b5550!important;font-size:11px;cursor:pointer;}.loginSubmit{width:100%;height:50px;display:flex!important;align-items:center;justify-content:space-between!important;padding:0 17px!important;margin-top:25px;border-radius:11px!important;background:#f15a24!important;color:#fff!important;font-size:13px;box-shadow:0 9px 18px #f15a242b;transition:transform .18s,box-shadow .18s;}.loginSubmit:hover{transform:translateY(-1px);box-shadow:0 12px 22px #f15a2438;}.loginSubmit:disabled{opacity:.7;cursor:wait;}.loginError{min-height:18px;margin:12px 0 0;color:#b3261e;font-size:12px;}.loginHelp{margin:35px 0 0;padding-top:18px;border-top:1px solid #f0eae7;color:#a09796;font-size:11px;line-height:1.6;}
-@media(max-width:760px){.guest .contentArea{padding:16px!important;}.guest #main{min-height:calc(100vh - 32px);}.loginFrame{grid-template-columns:1fr;min-height:0;border-radius:19px;}.loginStory{display:none;}.loginPanel{padding:35px 25px 28px;}.loginMobileBrand{display:flex;}.loginPanel h1{font-size:25px;}.loginSub{margin-bottom:28px;}}
-
 
 /* Simple, understated Al Asra admin login */
 .guest .contentArea{padding:28px!important;background:#f7f6f4!important;}

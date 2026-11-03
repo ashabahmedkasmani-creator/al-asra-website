@@ -17,9 +17,6 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('api')
                 ->group(base_path('routes/api.php'));
 
-            // Backwards-compatible aliases retained for existing integrations and tests.
-            Route::middleware('api')
-                ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
